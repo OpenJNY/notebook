@@ -54,7 +54,7 @@ $\sigma(\cdot)$ は\emph{シグモイド関数 (logistic sigmoid function)}と�
 
 \subsection*{4.2.1 連続値入力}
 
-クラスの条件付き確率 $p(\vx \given \cC_k)$ がガウス分布であると仮定して，事後確率がどうなるかを考える．
+クラスの条件付き確率 $p(\vx \given \cC_k)$ がガウス分布であると仮定して，事後確率 $p(\cC_k \given \vx)$ がどうなるかを考える．
 すべてのクラスが同じ共分散行列を共有していると仮定する．
 \[
 p(\vx \given \cC_k) = \parens{2\pi}^{-\frac{D}{2}} \abs{\mSigma}^{-\frac{1}{2}} \exp \braces{-\frac{1}{2} (\vx - \vmu_k)^\top \mSigma^{-1} (\vx - \vmu_k) } \tag{4.64}
@@ -63,7 +63,7 @@ p(\vx \given \cC_k) = \parens{2\pi}^{-\frac{D}{2}} \abs{\mSigma}^{-\frac{1}{2}} 
 \subsubsection*{2クラス}
 
 \begin{equation}
-  p(\cC_1 \given \vx) = \sigma(\vx^\top \vx + w_0)
+  p(\cC_1 \given \vx) = \sigma(\vw\trans \vx + w_0)
 \end{equation}
 \begin{align}
   \vw & = \mSigma^{-1} (\vmu_1 - \vmu_2) \\
@@ -243,10 +243,10 @@ $p(\vx \given \cC_k)$ が指数型分布族なら，\emph{natural (calibrated) p
   p(\cC_1 \given \vx) = \sigma(\vw\trans \vx + w_0) 
 \]
 \[
-  p(\cC_k \given \vx) = \mathrm{softmax}_k(\vw\trans \vx + w_0)
+  p(\cC_k \given \vx) = \mathrm{softmax}_k(\vw_k\trans \vx + w_{k0})
 \]
 
-事後確率 $p(\cC_k \given \vx)$ を一般化線形モデルの関数形式で仮定し，最尤法によるパラメータ推定を行う方法として，\emph{反復重み付け最小二乗 (iterative reweighted squares; IRLS)}が知られている．
+事後確率 $p(\cC_k \given \vx)$ を一般化線形モデルの関数形式で仮定し，最尤法によるパラメータ推定を行う方法として，\emph{反復重み付け最小二乗 (iterative reweighted least squares; IRLS)}が知られている．
 
 \begin{embedbox}
 \begin{description}[style=nextline]
@@ -268,7 +268,7 @@ $p(\vx \given \cC_k)$ が指数型分布族なら，\emph{natural (calibrated) p
   p(\cC_1 \given \vx) = \sigma(\vw\trans \vphi) 
 \]
 \[
-  p(\cC_k \given \vx) = \mathrm{softmax}_k(\vw\trans \vphi)
+  p(\cC_k \given \vx) = \mathrm{softmax}_k(\vw_k\trans \vphi)
 \]
 
 \begin{itemize}
